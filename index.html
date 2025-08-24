@@ -184,33 +184,45 @@
         </footer>
     </div>
 
-    <!-- Script que transforma todas ocorrências de "Futemax" em link -->
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const site = "https://futemax.soy";
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const site = "https://futemax.soy";
+  let count = 0;
+  const maxLinks = 2;
 
-      function linkify(text) {
-        return text.replace(/\b(Futemax(?:\sTV|\sOficial)?)\b/gi, 
-          `<a href="${site}" target="_blank" class="futemax-link">$1</a>`);
+  function linkify(text) {
+    return text.replace(/\b(Futemax(?:\sTV|\sOficial)?)\b/gi, (match) => {
+      if (count < maxLinks) {
+        count++;
+        return `<a href="${site}" target="_blank" class="futemax-link">${match}</a>`;
       }
-
-      function walk(node) {
-        if (node.nodeType === 3) { 
-          let replaced = linkify(node.nodeValue);
-          if (replaced !== node.nodeValue) {
-            let span = document.createElement("span");
-            span.innerHTML = replaced;
-            node.replaceWith(...span.childNodes);
-          }
-        } else if (node.nodeType === 1 && node.nodeName !== "A" && node.nodeName !== "SCRIPT" && node.nodeName !== "STYLE") {
-          for (let child of [...node.childNodes]) {
-            walk(child);
-          }
-        }
-      }
-
-      walk(document.body);
+      return match; // não substitui se já atingiu o máximo
     });
-    </script>
+  }
+
+  function walk(node) {
+    if (node.nodeType === 3) {
+      let replaced = linkify(node.nodeValue);
+      if (replaced !== node.nodeValue) {
+        let span = document.createElement("span");
+        span.innerHTML = replaced;
+        node.replaceWith(...span.childNodes);
+      }
+    } else if (
+      node.nodeType === 1 &&
+      node.nodeName !== "A" &&
+      node.nodeName !== "SCRIPT" &&
+      node.nodeName !== "STYLE"
+    ) {
+      for (let child of [...node.childNodes]) {
+        walk(child);
+      }
+    }
+  }
+
+  walk(document.body);
+});
+</script>
+
 </body>
 </html>
