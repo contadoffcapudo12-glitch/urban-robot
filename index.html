@@ -20,11 +20,11 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
-                <h1 class="hero-title">Futemax – Futebol ao Vivo Online em HD</h1>
+                <h1 class="hero-title"><a href="https://futemax.soy" target="_blank" class="futemax-link">Futemax</a> – Futebol ao Vivo Online em HD</h1>
                 <p class="hero-description">
-                    Se você procura o <strong>Futemax oficial</strong>, está no lugar certo! Aqui você assiste <strong>futebol ao vivo, UFC, NBA, vôlei, campeonatos nacionais e internacionais</strong>, tudo em alta qualidade e de graça. O <strong>Futemax TV</strong> é referência para quem deseja acompanhar <strong>jogos de hoje, futebol ao vivo online e transmissões em HD</strong> sem complicação.
+                    Se você procura o <strong><a href="https://futemax.soy" target="_blank" class="futemax-link">Futemax oficial</a></strong>, está no lugar certo! Aqui você assiste <strong>futebol ao vivo, UFC, NBA, vôlei, campeonatos nacionais e internacionais</strong>, tudo em alta qualidade e de graça. O <strong>Futemax TV</strong> é referência para quem deseja acompanhar <strong>jogos de hoje, futebol ao vivo online e transmissões em HD</strong> sem complicação.
                 </p>
-                <a href="https://futemax.soy" target="_blank" class="cta-button">ASSISTIR AGORA</a>
+                <a href="https://futemax.miami" target="_blank" class="cta-button">ASSISTIR AGORA</a>
             </div>
         </section>
 
@@ -183,46 +183,5 @@
             </div>
         </footer>
     </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const site = "https://futemax.soy";
-  let count = 0;
-  const maxLinks = 2;
-
-  function linkify(text) {
-    return text.replace(/\b(Futemax(?:\sTV|\sOficial)?)\b/gi, (match) => {
-      if (count < maxLinks) {
-        count++;
-        return `<a href="${site}" target="_blank" class="futemax-link">${match}</a>`;
-      }
-      return match; // não substitui se já atingiu o máximo
-    });
-  }
-
-  function walk(node) {
-    if (node.nodeType === 3) {
-      let replaced = linkify(node.nodeValue);
-      if (replaced !== node.nodeValue) {
-        let span = document.createElement("span");
-        span.innerHTML = replaced;
-        node.replaceWith(...span.childNodes);
-      }
-    } else if (
-      node.nodeType === 1 &&
-      node.nodeName !== "A" &&
-      node.nodeName !== "SCRIPT" &&
-      node.nodeName !== "STYLE"
-    ) {
-      for (let child of [...node.childNodes]) {
-        walk(child);
-      }
-    }
-  }
-
-  walk(document.body);
-});
-</script>
-
 </body>
 </html>
